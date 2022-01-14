@@ -24,7 +24,7 @@ go get -u github.com/longbridgeapp/gorm-sharding
 
 After the database connection opened, use the sharding plugin that registered the tables which you want to shard.
 
-The `Register` function takes a map, the key is the **original table name** and the value is a **resolver** which is composed by five configurable fields that described in [Config description](config-description).
+The `Register` function takes a map, the key is the **original table name** and the value is a **resolver** which is composed by five configurable fields that described in [Config description](#config-description).
 
 ## Usage Example
 
