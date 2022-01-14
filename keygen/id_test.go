@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/longbridgeapp/assert"
 )
 
 func TestNext(t *testing.T) {
@@ -12,7 +12,7 @@ func TestNext(t *testing.T) {
 	ipv4, err := getIPv4()
 
 	assert.Nil(t, err)
-	assert.GreaterOrEqual(t, time.Now().UnixNano()/1e6, int64(id>>int64(timeLeft))+twepoch)
+	assert.Equal(t, true, time.Now().UnixNano()/1e6 >= int64(id>>int64(timeLeft))+twepoch)
 	assert.Equal(t, int(ipv4[3])%64, getWorkerNumber(id))
 	assert.Equal(t, 24, TableIdx(id))
 }
