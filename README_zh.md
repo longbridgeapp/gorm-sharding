@@ -97,7 +97,7 @@ Whether to enable a full table.
 
 可以参考上面的用法示例。
 
-推荐使用 [keygen](https://github.com/longbridgeapp/gorm-sharding) 组件，它是一个分布式的主键生成器。
+推荐使用 [keygen](https://github.com/longbridgeapp/gorm-sharding/tree/main/keygen) 组件，它是一个分布式的主键生成器。
 
 当使用自增类的生成器时，tableIdx 参数可以忽略。
 

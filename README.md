@@ -100,7 +100,7 @@ It's signature is `func(tableIdx int64) int64`.
 
 For an example, see the [usage example](#usage-example) above.
 
-We recommend you use the [keygen](https://github.com/longbridgeapp/gorm-sharding) component, it is a distributed primary key generator.
+We recommend you use the [keygen](https://github.com/longbridgeapp/gorm-sharding/tree/main/keygen) component, it is a distributed primary key generator.
 
 When use auto-increment like generator, the tableIdx argument could ignored.
 
