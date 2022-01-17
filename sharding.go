@@ -24,15 +24,49 @@ type Sharding struct {
 }
 
 type Resolver struct {
-	// EnableFullTable whether to enable a full table
+	// EnableFullTable represents whether to enable full table.
+	// When enabled, data will double write to both main table and sharding table.
 	EnableFullTable bool
-	// ShardingColumn column name of the sharding column, for example: user_id
+
+	// ShardingColumn specifies the table column you want to used for sharding the table rows.
+	// For example, for a product order table, you may want to split the rows by `user_id`.
 	ShardingColumn string
-	// ShardingAlgorithm implement the sharding algorithm for generate table name suffix
+
+	// ShardingAlgorithm specifies a function to generate the sharding
+	// table's suffix by the column value.
+	// For example, this function implements a mod sharding algorithm.
+	//
+	// 	func(value interface{}) (suffix string, err error) {
+	//		if uid, ok := value.(int64);ok {
+	//			return fmt.Sprintf("_%02d", user_id % 64), nil
+	//		}
+	//		return "", errors.New("invalid user_id")
+	// 	}
 	ShardingAlgorithm func(columnValue interface{}) (suffix string, err error)
-	// ShardingAlgorithm sharding algorithm by primary key, if it posible.
+
+	// ShardingAlgorithmByPrimaryKey specifies a function to generate the sharding
+	// table's suffix by the primary key.
+	// Note, when the record contains an id field,
+	// ShardingAlgorithmByPrimaryKey will preferred than ShardingAlgorithm.
+	// For example, this function use the Keygen library to generate the suffix.
+	//
+	// 	func(id int64) (suffix string) {
+	//		return fmt.Sprintf("_%02d", keygen.TableIdx(id))
+	//	}
 	ShardingAlgorithmByPrimaryKey func(id int64) (suffix string)
-	// PrimaryKeyGenerate for generate primary key
+
+	// PrimaryKeyGenerate specifies a function to generate the primary key.
+	// Used only when insert and the record does not contains an id field.
+	// We recommend you use the
+	// [keygen](https://github.com/longbridgeapp/gorm-sharding/tree/main/keygen) component,
+	// it is a distributed primary key generator.
+	// When use auto-increment like generator, the tableIdx argument could ignored.
+	//
+	// For example, this function use the Keygen library to generate the primary key.
+	//
+	// 	func(tableIdx int64) int64 {
+	//		return keygen.Next(tableIdx)
+	//	}
 	PrimaryKeyGenerate func(tableIdx int64) int64
 }
 

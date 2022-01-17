@@ -24,7 +24,9 @@ go get -u github.com/longbridgeapp/gorm-sharding
 
 数据库连接打开后，使用分表插件注册需要拆分的表。
 
-`Register` 函数接收一个 map，键是**原始表名**，值是一个 **resolver** ，由可配置的字段组成，见配置描述。
+`Register` 函数接收一个 map，键是**原始表名**，值是一个 **resolver** ，由可配置的字段组成。
+
+具体配置信息见 [Godoc](https://pkg.go.dev/github.com/longbridge/gorm-sharding)。
 
 ## 用法示例
 
@@ -51,59 +53,6 @@ middleware := sharding.Register(map[string]sharding.Resolver{
 })
 db.Use(middleware)
 ```
-
-## 配置描述
-
-- [EnableFullTable](#EnableFullTable)
-- [ShardingColumn](#ShardingColumn)
-- [ShardingAlgorithm](#ShardingAlgorithm)
-- [ShardingAlgorithmByPrimaryKey](#ShardingAlgorithmByPrimaryKey)
-- [PrimaryKeyGenerate](#PrimaryKeyGenerate)
-
-#### EnableFullTable
-
-Whether to enable a full table.
-是否开启全表。
-
-开启后，分表插件将双写数据到主表和分表。
-
-#### ShardingColumn
-
-用来分表的表字段。
-
-如，对于一个订单表，你可能想用 `user_id` 拆分数据。
-
-### ShardingAlgorithm
-
-使用列值生成分表后缀的函数。
-
-签名是 `func(columnValue interface{}) (suffix string, err error)`。
-
-可以参考上面的用法示例。
-
-#### ShardingAlgorithmByPrimaryKey
-
-使用主键生成分表后缀的函数。
-
-签名是 `func(id int64) (suffix string)`。
-
-可以参考上面的用法示例。
-
-注意，当记录包含 id 字段时，ShardingAlgorithmByPrimaryKey 优先于 ShardingAlgorithm。
-
-#### PrimaryKeyGenerate
-
-生成主键的函数。
-
-只有当插入数据并且记录不包含 id 字段时使用。
-
-签名是 `func(tableIdx int64) int64`。
-
-可以参考上面的用法示例。
-
-推荐使用 [keygen](https://github.com/longbridgeapp/gorm-sharding/tree/main/keygen) 组件，它是一个分布式的主键生成器。
-
-当使用自增类的生成器时，tableIdx 参数可以忽略。
 
 ## 许可证
 

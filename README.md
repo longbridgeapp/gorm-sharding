@@ -24,7 +24,9 @@ go get -u github.com/longbridgeapp/gorm-sharding
 
 After the database connection opened, use the sharding plugin that registered the tables which you want to shard.
 
-The `Register` function takes a map, the key is the **original table name** and the value is a **resolver** which is composed by five configurable fields that described in [Config description](#config-description).
+The `Register` function takes a map, the key is the **original table name** and the value is a **resolver** which is composed by five configurable fields.
+
+For config detail info, see [Godoc](https://pkg.go.dev/github.com/longbridge/gorm-sharding).
 
 ## Usage Example
 
@@ -51,58 +53,6 @@ middleware := sharding.Register(map[string]sharding.Resolver{
 })
 db.Use(middleware)
 ```
-
-## Config description
-
-- [EnableFullTable](#EnableFullTable)
-- [ShardingColumn](#ShardingColumn)
-- [ShardingAlgorithm](#ShardingAlgorithm)
-- [ShardingAlgorithmByPrimaryKey](#ShardingAlgorithmByPrimaryKey)
-- [PrimaryKeyGenerate](#PrimaryKeyGenerate)
-
-#### EnableFullTable
-
-Whether to enable a full table.
-
-When full table enabled, sharding plugin will double write data to both main table and sharding table.
-
-#### ShardingColumn
-
-Which table column you want to used for sharding the table rows.
-
-For example, for a product order table, you may want to split the rows by `user_id`.
-
-### ShardingAlgorithm
-
-A function to generate the sharding table's suffix by the column value.
-
-It's signature is `func(columnValue interface{}) (suffix string, err error)`.
-
-For an example, see the [usage example](#usage-example) above.
-
-#### ShardingAlgorithmByPrimaryKey
-
-A function to generate the sharding table's suffix by the primary key.
-
-It's signature is `func(id int64) (suffix string)`.
-
-For an example, see the [usage example](#usage-example) above.
-
-Note, when the record contains an id field, ShardingAlgorithmByPrimaryKey will preferred than ShardingAlgorithm.
-
-#### PrimaryKeyGenerate
-
-A function to generate the primary key.
-
-Used only when insert and the record does not contains an id field.
-
-It's signature is `func(tableIdx int64) int64`.
-
-For an example, see the [usage example](#usage-example) above.
-
-We recommend you use the [keygen](https://github.com/longbridgeapp/gorm-sharding/tree/main/keygen) component, it is a distributed primary key generator.
-
-When use auto-increment like generator, the tableIdx argument could ignored.
 
 ## License
 
