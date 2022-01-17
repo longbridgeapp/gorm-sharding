@@ -105,10 +105,6 @@ Whether to enable a full table.
 
 当使用自增类的生成器时，tableIdx 参数可以忽略。
 
-## 参考
-
-https://gorm.io/docs/write_plugins.html#Plugin
-
 ## 许可证
 
 本项目使用 MIT 许可证。

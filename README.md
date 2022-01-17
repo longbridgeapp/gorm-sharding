@@ -104,10 +104,6 @@ We recommend you use the [keygen](https://github.com/longbridgeapp/gorm-sharding
 
 When use auto-increment like generator, the tableIdx argument could ignored.
 
-## References
-
-https://gorm.io/docs/write_plugins.html#Plugin
-
 ## License
 
 This project under MIT license.
