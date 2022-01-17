@@ -1,12 +1,10 @@
 # Gorm Sharding
 
+English | [简体中文](./README.zh-CN.md)
+
 Gorm Plugin for sharding table.
 
 This plugin base on SQL Parser, catch raw SQL before execute db, and then replace table name by sharding rules.
-
-## Translations
-
-For chinese, see [README_zh.md](./README_zh.md)
 
 ## Features
 
