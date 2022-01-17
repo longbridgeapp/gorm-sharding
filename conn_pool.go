@@ -1,4 +1,4 @@
-package gormsharding
+package sharding
 
 import (
 	"context"

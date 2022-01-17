@@ -29,7 +29,7 @@ The `Register` function takes a map, the key is the **original table name** and 
 ## Usage Example
 
 ```go
-sharding := gormsharding.Register(map[string]gormsharding.Resolver{
+middleware := sharding.Register(map[string]sharding.Resolver{
 	"orders": {
 		EnableFullTable: true,
 		ShardingColumn: "user_id",
@@ -49,7 +49,7 @@ sharding := gormsharding.Register(map[string]gormsharding.Resolver{
 		}
 	},
 })
-db.Use(sharding)
+db.Use(middleware)
 ```
 
 ## Config description

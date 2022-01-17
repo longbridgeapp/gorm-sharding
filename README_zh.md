@@ -25,7 +25,7 @@ go get -u github.com/longbridgeapp/gorm-sharding
 ## 用法示例
 
 ```go
-sharding := gormsharding.Register(map[string]gormsharding.Resolver{
+middleware := sharding.Register(map[string]sharding.Resolver{
 	"orders": {
 		EnableFullTable: true,
 		ShardingColumn: "user_id",
@@ -45,7 +45,7 @@ sharding := gormsharding.Register(map[string]gormsharding.Resolver{
 		}
 	},
 })
-db.Use(sharding)
+db.Use(middleware)
 ```
 
 ## 配置描述
