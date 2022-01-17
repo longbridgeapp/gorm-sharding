@@ -1,12 +1,13 @@
 # Gorm Sharding
 
-[![GoDoc](https://godoc.org/github.com/longbridge/gorm-sharding?status.svg)](https://godoc.org/github.com/longbridge/gorm-sharding)
+[![Go](https://github.com/longbridgeapp/gorm-sharding/actions/workflows/go.yml/badge.svg)](https://github.com/longbridgeapp/gorm-sharding/actions/workflows/go.yml)
+[![GoDoc](https://godoc.org/github.com/longbridgeapp/gorm-sharding?status.svg)](https://godoc.org/github.com/longbridgeapp/gorm-sharding)
 
 English | [简体中文](./README.zh-CN.md)
 
-Gorm Sharding splits large tables into smaller ones to speed up access.
+Gorm Sharding plugin using SQL parser and replace for splits large tables into smaller ones, redirects Query into sharding tables. Give you a high performance database access.
 
-Assume we have an order table with 100 million rows, we can divide it into 1000 smaller ones, so the read and write operation will faster than operate the original table.
+Gorm Sharding 是一个业务污染小，高性能的数据库分表方案。通过 SQL 解析和替换，实现分表逻辑，让查询正确的根据规则执行到分表里面。
 
 ![Example Scenario](./images/example-scenario.svg)
 
@@ -15,6 +16,7 @@ Assume we have an order table with 100 million rows, we can divide it into 1000 
 - Non-intrusive design. Load the plugin, specify the config, and all done.
 - Lighting-fast. No network based middlewares, as fast as Go.
 - Multiple database support. PostgreSQL tested, MySQL and SQLite is coming.
+- Allows you custom the Primary Key generator (Sequence, UUID, Snowflake ...).
 
 ## Install
 
@@ -49,7 +51,9 @@ middleware := sharding.Register(map[string]sharding.Resolver{
 			return fmt.Sprintf("_%02d", keygen.TableIdx(id))
 		},
 		PrimaryKeyGenerate: func(tableIdx int64) int64 {
-			return keygen.Next(tableIdx)
+			keygen.Snowflake()
+			keygen.UUID(),
+			keygen.Sequence("orders_id_seq"),
 		}
 	},
 })
