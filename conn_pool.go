@@ -61,7 +61,7 @@ func (pool ConnPool) QueryContext(ctx context.Context, query string, args ...int
 		return nil, err
 	}
 
-	pool.sharding.querys.Store("last_query", query)
+	pool.sharding.querys.Store("last_query", stQuery)
 
 	if table != "" {
 		if r, ok := pool.sharding.Resolvers[table]; ok {
