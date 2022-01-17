@@ -9,13 +9,13 @@
 Keygen id 在其比特序列中包含了表索引，这样可以在没有分表键的情况下定位分表。
 例如，使用 Keygen id，我们可以：
 
-```
+```sql
 select * from orders where id = 76362673717182593
 ```
 
 使用雪花算法，则需要：
 
-```
+```sql
 select * from orders where id = 76362673717182593 and user_id = 100
 ```
 

@@ -9,13 +9,13 @@ A Distributed Primary Key generator.
 Keygen id contains a table index in it's bit sequence, so we can locate the sharding table whitout the sharding key.
 For example, use Keygen id, we could use:
 
-```
+```sql
 select * from orders where id = 76362673717182593
 ```
 
 Use snowflake, you should use:
 
-```
+```sql
 select * from orders where id = 76362673717182593 and user_id = 100
 ```
 
