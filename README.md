@@ -2,9 +2,11 @@
 
 English | [简体中文](./README.zh-CN.md)
 
-Gorm Plugin for sharding table.
+Gorm Sharding splits large tables into smaller ones to speed up access.
 
-This plugin base on SQL Parser, catch raw SQL before execute db, and then replace table name by sharding rules.
+Assume we have an order table with 100 million rows, we can divide it into 1000 smaller ones, so the read and write operation will faster than operate the original table.
+
+![Example Scenario](./images/example-scenario.svg)
 
 ## Features
 

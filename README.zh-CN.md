@@ -1,8 +1,12 @@
 # Gorm Sharding
 
-Gorm 分表插件。
+[English](./README.md) | 简体中文
 
-基于 SQL 解析器，执行前捕获原始 SQL，根据分表规则替换表名。
+Gorm Sharding 将大表拆分成多个小表来加速访问。
+
+假设有一个一亿行的订单表，我们可以将它拆分成一千个小表，这样读写操作就会比操作原始表快很多。
+
+![场景示例](./images/example-scenario.svg)
 
 ## 特色
 
