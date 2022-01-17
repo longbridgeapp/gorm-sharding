@@ -1,5 +1,7 @@
 # Gorm Sharding
 
+[![GoDoc](https://godoc.org/github.com/longbridge/gorm-sharding?status.svg)](https://godoc.org/github.com/longbridge/gorm-sharding)
+
 English | [简体中文](./README.zh-CN.md)
 
 Gorm Sharding splits large tables into smaller ones to speed up access.
