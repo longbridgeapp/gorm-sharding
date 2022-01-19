@@ -1,5 +1,9 @@
 # Gorm Sharding
 
+This project has moved to Gorm offical organization: 
+
+https://github.com/go-gorm/sharding
+
 [![Go](https://github.com/longbridgeapp/gorm-sharding/actions/workflows/go.yml/badge.svg)](https://github.com/longbridgeapp/gorm-sharding/actions/workflows/go.yml)
 [![Go Reference](https://pkg.go.dev/badge/github.com/longbridgeapp/gorm-sharding.svg)](https://pkg.go.dev/github.com/longbridgeapp/gorm-sharding)
 
